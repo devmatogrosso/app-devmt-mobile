@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/ui/screens/events.dart';
+
+import './router.dart' as router;
 
 void main() => runApp(MyApp());
 
@@ -8,15 +11,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'DevMT',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Color(0xFFe64c3b)
-      ),
+      theme: ThemeData(primaryColor: Color(0xFFe64c3b)),
       home: MyHomePage(title: 'DevMT'),
+      onGenerateRoute: router.generateRoute,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  static const routeName = '/Home';
+
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
@@ -32,7 +36,18 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: ListView(
+        children: <Widget>[
+          FlatButton(
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                Events.routeName,
+              );
+            },
+            child: Text("Eventos"),
+          )
+        ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
